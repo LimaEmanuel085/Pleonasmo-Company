@@ -24,6 +24,24 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        User updatedUser = userService.updateUser(id, user);
+        if (updatedUser == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
+    }
+
     @PostMapping("/user")
     //ResponseEntity é uma classe do Spring que representa a resposta HTTP, permitindo controlar o status code, os headers e o corpo da resposta.
     public ResponseEntity<User> createUser(@RequestBody User user) {
