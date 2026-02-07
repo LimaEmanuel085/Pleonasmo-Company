@@ -23,6 +23,8 @@ public class User {
     private Long id;
     private String name;
     private int age;
+
+    @Column(nullable = false, unique = true)
     private String email;
     private String password;
 }
