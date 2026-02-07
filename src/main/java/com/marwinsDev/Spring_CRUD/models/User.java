@@ -1,19 +1,28 @@
 package com.marwinsDev.Spring_CRUD.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+// Modelo de usuário para o MongoDB
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Entity
+
+// Especifica o nome da coleção no MongoDB
+@Table(name = "users")
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "usuarios")
-
+// Classe de modelo de usuário
 public class User {
-    @Id
-    private long id;
+    @Id // Anotação para indicar que este campo é o ID do documento
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática do ID
+    private Long id;
     private String name;
+    private int age;
     private String email;
+    private String password;
 }
