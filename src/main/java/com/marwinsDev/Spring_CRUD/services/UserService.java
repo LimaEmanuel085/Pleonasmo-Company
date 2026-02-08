@@ -20,14 +20,24 @@ public class UserService {
     }
 
     public User updateUser(Long id, User user) {
-        User existingUser = userRepository.findById(id).orElse(null);
-        if (existingUser == null) {
-            return null;
+        User existingUser = userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Usuário de id " + id + " não encontrado.")
+        );
+        if (user.getName() != null) {
+            existingUser.setName(user.getName());
         }
-        existingUser.setName(user.getName());
-        existingUser.setAge(user.getAge());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
+
+        if (user.getEmail() != null) {
+            existingUser.setEmail(user.getEmail());
+        }
+
+        if (user.getPassword() != null) {
+            existingUser.setPassword(user.getPassword());
+        }
+
+        if (user.getAge() != null) {
+            existingUser.setAge(user.getAge());
+        }
         return userRepository.save(existingUser);
     }
 

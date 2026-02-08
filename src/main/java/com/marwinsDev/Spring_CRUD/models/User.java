@@ -22,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática do ID
     private Long id;
     private String name;
-    private int age;
+    private Integer age;
 
     @Column(nullable = false, unique = true)
     private String email;
